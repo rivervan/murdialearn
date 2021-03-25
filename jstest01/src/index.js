@@ -1,10 +1,8 @@
-function component() {
-    const element = document.createElement('div');
 
-    // Lodash, currently included via a script, is required for this line to work
-    element.innerHTML = "<div>hola</div>";
+import { handleSubmit } from './client/js/formHandler'
 
-    return element;
-}
 
-document.body.appendChild(component());
+const btnSubmit = document.getElementById('submit');
+btnSubmit.addEventListener('click', handleSubmit, false);
+btnSubmit.addEventListener( 'submit', handleSubmit, false);
+

@@ -10,7 +10,15 @@ module.exports = {
     mode: 'development',
 
     module: {
-        rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+        rules: [
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        loader: "babel-loader"
+                    }
+
+
+            ],
     },
     plugins: [new HtmlWebpackPlugin({ template: 'index.html'})],
 };

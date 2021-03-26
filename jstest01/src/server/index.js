@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config();
-console.log(`Your API key is ${process.env.API_KEY}`);
+
 
 
 
@@ -31,11 +31,13 @@ app.listen(8080, function () {
 
 
 app.get('/test/:nom', function (req, res) {
+
+
     const urlApiKey = "https://api.meaningcloud.com/sentiment-2.1?key=" + process.env.API_KEY + "&of=json&txt=" + req.params.nom + "&model=general&lang=en";
 
     fetch(urlApiKey).then(
         data => data.json()).then(myjson =>{
-        res.send(myjson)}
+        return res.send(myjson)}
     ).catch(err => { throw err })
 
 

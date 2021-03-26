@@ -6,6 +6,11 @@ function handleSubmit(event) {
     let formText = document.getElementById('name').value
     checkForName(formText)
     console.log("::: Form Submitted :::")
+
+
+
+    //fetch(path).then(res => res.json()).then(function (res){document.getElementById('results').innerHTML = '<div>' + res.sentence_list[0].sentimented_entity_list[0].type + '</div>'})
+
     getDataApi(formText.toString()).then(res =>{
         document.getElementById('results').innerHTML = '<div>' + res  + '</div>'
     }).catch(err => {document.getElementById('results').innerHTML = '<div>' + err.message + '</div>'})

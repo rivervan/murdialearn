@@ -7,15 +7,13 @@ module.exports = {
     entry: './src/index.js',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './src',
-        port:9090,
-        historyApiFallback: true,
-        proxy: {
-            '/test': {
-                target: 'http://localhost:8080',
-            }
-        },
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 8081,
+        proxy: {'*':'http://localhost:8080/'},
+        host: 'localhost'
     },
+
     mode: 'development',
 
     module: {

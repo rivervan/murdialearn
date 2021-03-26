@@ -6,7 +6,22 @@ module.exports = {
     mode: 'production',
 
     module: {
-        rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+        rules: [
+
+                    { test: /\.txt$/, use: 'raw-loader' },
+
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        loader: "babel-loader"
+                    },
+                    {
+                        test: /\.scss$/,
+                        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+                    }
+
+        ],
+
     },
     plugins: [new HtmlWebpackPlugin({ template: 'index.html'})],
 };

@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const createProxyMiddleware  = require('http-proxy-middleware');
 
 
 module.exports = {

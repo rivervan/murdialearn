@@ -11,21 +11,33 @@ else
 function handleSubmit(event) {
     event.preventDefault()
 
-    let formText = document.getElementById('name').value
-    checkForName(formText)
-    console.log("::: Form Submitted :::")
 
-    getDataApi(formText.toString()).then(res =>{
-        document.getElementById('results').innerHTML = '<div>' + res  + '</div>'
-    }).catch(err => {document.getElementById('results').innerHTML = '<div>' + err.message + '</div>'})
+        let formText = document.getElementById('name').value
+        checkForName(formText)
+        getDataApi(formText.toString()).then(res =>{
+
+            let htmlElement = '<div>score_tag: ' + res.score_tag  +  '</div>' + '<br>' +
+                              '<div>   status: ' + res.status.remaining_credits  + '</div>' + '<br>'
+            if (res.sentimented_entity_list.length > 0)
+                htmlElement = htmlElement + '<div>   entity: ' + res.sentimented_entity_list[0].type  + '</div>'
+            else
+                htmlElement = htmlElement + '<div>   entity: ------------ </div>'
+
+            document.getElementById('results').innerHTML = htmlElement
+
+        }).catch(err => {document.getElementById('results').innerHTML = '<div>' + err.message + '</div>'})
+
+
 
 }
 
 
 function getDataApi(name){
-    envPath = envPath + '/test/' + name;
-    return fetch(envPath)
-        .then(res => res.json()).then(function(res) {return res.sentence_list[0].sentimented_entity_list[0].type})
+    const myPath = envPath + '/test/' + name;
+    return fetch(myPath)
+        .then(res => res.json()).then(function(res) {
+            return res
+        })
 }
 
 

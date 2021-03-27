@@ -9,7 +9,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/client/index.js',
     mode: 'production',
 
     optimization: {
@@ -40,7 +40,7 @@ module.exports = {
         ],
 
     },
-    plugins: [new HtmlWebpackPlugin({ template: 'index.html'}),
+    plugins: [new HtmlWebpackPlugin({ template: './src/client/views/index.html'}),
               new MiniCssExtractPlugin(),
               new WorkboxPlugin.GenerateSW({clientsClaim: true, skipWaiting: true}),
     ]

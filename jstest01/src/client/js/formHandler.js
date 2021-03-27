@@ -16,12 +16,15 @@ function handleSubmit(event) {
         checkForName(formText)
         getDataApi(formText.toString()).then(res =>{
 
-            let htmlElement = '<div>score_tag: ' + res.score_tag  +  '</div>' + '<br>' +
-                              '<div>   status: ' + res.status.remaining_credits  + '</div>' + '<br>'
-            if (res.sentimented_entity_list.length > 0)
-                htmlElement = htmlElement + '<div>   entity: ' + res.sentimented_entity_list[0].type  + '</div>'
-            else
-                htmlElement = htmlElement + '<div>   entity: ------------ </div>'
+            let htmlElement = '<div id="confidence">Confidence: ' + res.sentence_list[0].confidence  +  '</div>' + '<br>' +
+                              '<div id="score_tag">Score_tag: '   + res.sentence_list[0].score_tag  + '</div>' + '<br>'  +
+                              '<div id="polarity">Polarity:<div id="inip">inip: ' +  res.sentence_list[0].inip       + '</div><div id="endp">endp:' + res.sentence_list[0].endp   + '</div> </div>'
+
+            res.sentimented_entity_list[0]
+
+
+
+
 
             document.getElementById('results').innerHTML = htmlElement
 

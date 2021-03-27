@@ -36,7 +36,20 @@
     <p>This is a footer </p>
 </footer>
 
-<script src="./src/index.js"></script>
+<script src="./src/index.js">
+
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                console.log('SW registered: ', registration);
+                alert('SW registered: ')
+            }).catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+                alert('SW registered: failed')
+            });
+        });
+    }
+</script>
 
 
 </body>

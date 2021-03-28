@@ -29,16 +29,23 @@ app.listen(8080, function () {
 
 
 
+const apiserv = async (urlApiKey) => {
+    const midatajson = await fetch(urlApiKey).then((dataRes) =>{ return dataRes.json()})
+    //console.debug(midatajson)
+    return midatajson
+}
+
 
 app.get('/test/:nom', function (req, res) {
-
-
     const urlApiKey = "https://api.meaningcloud.com/sentiment-2.1?key=" + process.env.API_KEY + "&of=json&txt=" + req.params.nom + "&model=general&lang=en";
-
-    fetch(urlApiKey).then(
-        data => data.json()).then(myjson =>{
-        return res.send(myjson)}
-    ).catch(err => { throw err })
-
+    apiserv(urlApiKey).then((resdata) => {
+        //console.debug(resdata)
+        return res.send(resdata)
+    }).catch(err => {throw err})
 
 })
+
+
+
+
+

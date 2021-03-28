@@ -25,16 +25,36 @@ function handleSubmit(event) {
 
 
         let formText = document.getElementById('name').value
-        checkForName(formText)
 
-       getDataApi('/test/' + formText.toString()).then((miresp) => {
-           let htmlElement = '<div id="confidence">Confidence: ' + miresp.sentence_list[0].confidence  +  '</div>' + '<br>' +
-                              '<div id="score_tag">Score_tag: '   + miresp.sentence_list[0].score_tag  + '</div>' + '<br>'  +
-                              '<div id="polarity">Polarity:<div id="inip">inip: ' +  miresp.sentence_list[0].inip       + '</div><div id="endp">endp:' + miresp.sentence_list[0].endp   + '</div> </div>'
 
-            document.getElementById('results').innerHTML = htmlElement
+         switch (checkForName(formText)){
+             case 0:
+                 {
+                     getDataApi('/test/' + formText.toString()).then((miresp) => {
+                         let htmlElement = '<div id="confidence">Confidence: ' + miresp.sentence_list[0].confidence  +  '</div>' + '<br>' +
+                             '<div id="score_tag">Score_tag: '   + miresp.sentence_list[0].score_tag  + '</div>' + '<br>'  +
+                             '<div id="polarity">Polarity:<div id="inip">inip: ' +  miresp.sentence_list[0].inip       + '</div><div id="endp">endp:' + miresp.sentence_list[0].endp   + '</div> </div>'
 
-       }).catch(err => {alert("Error to try getting data from API:" + err)} )
+                         document.getElementById('results').innerHTML = htmlElement
+
+                     }).catch(err => {alert("Error to try getting data from API:" + err)} )
+
+                 }
+                break;
+             case 1:
+                 alert('The sentence must contain only letters, numbers, space, dot,  comma, _')
+                 break;
+
+             case 2:
+                 alert('The sentence can not be an URL ')
+                 break;
+
+         }
+
+
+
+
+
 
 
 }
